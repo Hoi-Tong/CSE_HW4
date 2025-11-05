@@ -8,6 +8,20 @@ void trim(char s[]) {
     * 
     * You may, however, write your own string functions that you need.
     */
+    int i = 0;
+    int last_letter_index = -1;
+    while (s[i] != '\0') {
+      if ((s[i] != ' ') && (s[i] != '\t') && (s[i] != '\n') && (s[i] != '\r')) {
+         last_letter_index = i;
+      }
+      i++;
+    }
+
+    if (last_letter_index != -1) {
+      s[last_letter_index +1] = '\0';
+    } else {
+      s[0] = '\0';
+    }
 
 }
 

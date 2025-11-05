@@ -24,7 +24,7 @@ int main() {
     right--;       
 
     while (left < right) {
-        while (left >= right && !isalnum(str[left])) {
+        while (left <= right && !isalnum(str[left])) {
             left++;
         }
         while (left < right && !isalnum(str[right])) {

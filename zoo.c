@@ -13,12 +13,20 @@ typedef struct {
 int has_b(const char *s) {
     /* TODO: Return true (1) if the name s has the character 'b' in it. Otherwise, return false (0). 
              The strchr() function may come in handy. Use the man page to understand how it works. */
-    
+    if (strchr(s, 'b') == NULL) {
+        return 0;
+    } else {
+        return 1;
+    }
 }
 
 int should_keep(Animal *a) {
     /* TODO: Return true (1) if the animal meets the filtering criteria. Otherwise, return false (0). */
-    
+    if (has_b(a->name) || a->age > 15 || a->weight > 200.0) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 int compare_animals(Animal *A, Animal *B) {
@@ -26,12 +34,52 @@ int compare_animals(Animal *A, Animal *B) {
              Return 0 if the animal pointed to by A is equal to the animal pointed to by B.
              Return a negative value if the animal pointed to by A is smaller than the animal pointed to by B.
              Else, return a positive value. */
+    if (strcmp(A->species, B->species) == 0) {
+        if (A->age == B->age) {
+            if (strcmp(A->name, B->name)== 0) {
+                return 0;
+            } else {
+                return strcmp(A->name, B->name);
+            }
+        } else {
+            return (B->age - A->age);
+        }
+    } else {
+        return strcmp(A->species, B->species);
+    }
 
 }
 
 void sort_animals(Animal *arr, int size) {
     /* TODO: Sort the animals stored in the array arr using Bubble Sort. 
              Your implementation must call the function compare_animals(). */
+
+    /*outer for loop, loop whole arr except the last index bc swap
+    swap variale
+    inner for loop, loop whole - 1 - num of outer for loop
+    if statement, is i > i+1,
+    then swap, swap varaibel to see did the if statement work
+    then add inner for loop
+    if swap is used, 
+    then it will break outter loop*/
+
+    Animal temp ;
+    for (int i = 0; i < size - 1; i++) {
+        int swap = 0;
+        for (int j = 0; j < size-1-i ; j++) {
+            if ( compare_animals(&arr[j], &arr[j+1]) > 0 ) {
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+                swap = 1;
+
+            }
+        }
+        if (!swap) {
+            break;
+        }
+    }
+
 
 }
 
